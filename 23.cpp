@@ -1,38 +1,41 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
-typedef pair<int, int> pii;
 
-pii vals[10101]; //first il valore, second la posizione
-int ans[10101];
+#define F first
+#define S second
 
-int main(){
-	int n; cin >> n;
-	int idx=0;
-	for(int i=0; i<n; ++i){
-		int val; cin >> val;
-		vals[i] = {val, i};
+int32_t main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int n;
+	cin >> n;
+
+	vector<pair<int, int>> a(n);
+	for (int i = 0, x; i < n; i++) {
+		cin >> x;
+		a[i] = {x, i};
 	}
-	sort(vals, vals+n);
-	int sum2=0, sum3=0, res=0;
-	for(int i=1; i<=vals[n-1].first; ++i){
-		++sum2, ++sum3;
-		int dummy2=i, dummy3=i;
-		while(dummy2 % 2 == 0 && dummy2){
-			sum2 -= 1;
-			dummy2 /= 2;
-		}
-		while(dummy3 % 3 == 0 && dummy3){
-			sum3 -= 2;
-			dummy3 /= 3;
-		}
-		if(sum2 == sum3) ++res;
-		while(i == vals[idx].first && idx<n){
-			ans[vals[idx].second] = res;
-			++idx;
+	sort(a.begin(), a.end());
+
+	vector<int> ans(n);
+	int res = 0, s2 = 0, s3 = 0;
+	for (int i = 1, idx = 0; i <= a.back().F; i++) {
+		++s2, ++s3;
+		int t2 = i, t3 = i;
+		while (t2 % 2 == 0 && t2)
+			s2 -= 1, t2 /= 2;
+		while (t3 % 3 == 0 && t3)
+			s3 -= 2, t3 /= 3;
+		res += (s2 == s3);
+		while (idx < n && i == a[idx].F) {
+			ans[a[idx].S] = res;
+			idx++;
 		}
 	}
-	for(int i=0; i<n; ++i){
+
+	for (int i = 0; i < n; i++)
 		cout << ans[i] << " ";
-	}
-	cout << endl;
+	cout << "\n";
 }
