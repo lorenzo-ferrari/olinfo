@@ -69,10 +69,9 @@ int32_t main() {
 		return cnt % 2 == 1;
 	};
 
-	const int G = 205;
 	int ans = 0;
-	for (int i = 1; i < G; i += 2) {
-		for (int j = 1; j < G; j += 2) {
+	for (int i = 1; i < 200; i += 2) {
+		for (int j = 1; j < 200; j += 2) {
 			if (inner(pt(i, j))) {
 				bool x = true;
 				pt A(i-1, j-1), B(i+1, j-1), C(i+1, j+1), D(i-1, j+1);
