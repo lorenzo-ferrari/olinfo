@@ -33,7 +33,7 @@ void dijkstra(int node) {
 
     while (!Q.empty()) {
         int cur = Q.top().second;
-        long long cur_dist = Q.top().first;
+        long long cur_dist = -Q.top().first;
         Q.pop();
 
 				if (vis[cur])
@@ -45,7 +45,7 @@ void dijkstra(int node) {
             int w = g[cur][i].second;
             if (dist[v] > cur_dist + w) {
                 dist[v] = cur_dist + w;
-                Q.push({dist[v], v});
+                Q.push({-dist[v], v});
             }
         }
     }

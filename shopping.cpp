@@ -1,12 +1,14 @@
 #include <bits/stdc++.h>
 
+#define MAXN 100001
+
 using namespace std;
 
 ifstream in ("input.txt");
 ofstream out ("output.txt");
 
-int N, E, P, check;
-int dp_taken, dp_not_taken;
+int N, E, P;
+int dp_taken[MAXN], dp_not_taken[MAXN];
 
 int main()
 {
@@ -14,33 +16,27 @@ int main()
 
     in >> P;
 
-    if(E < P)
-    {
-        dp_not_taken = E;
-    }
+    if(P > E)
+        dp_not_taken[1] = E;
     else 
     {
-        dp_taken = E-P;
-        dp_not_taken = P-1;
+        dp_taken[1] = E-P;
+        dp_not_taken[1] = P-1;
     }
 
-    for(int i = 1; i < N; i++)
+    for(int i = 2; i <= N; i++)
     {
         in >> P;
 
-        check = max(dp_taken, dp_not_taken);
-
+        int check = max(dp_taken[i-1], dp_not_taken[i-1]);
         if(check < P)
-        {
-            dp_not_taken = check;
-        }
+            dp_not_taken[i] = check;
         else
         {
-            dp_not_taken = max(P-1, dp_taken);
-            dp_taken = check - P; 
-            
+            dp_taken[i] = check - P; 
+            dp_not_taken[i] = max(P-1, dp_taken[i-1]);
         }
     }
     
-    out << max(dp_not_taken, dp_taken);
+    out << max(dp_not_taken[N], dp_taken[N]);
 }

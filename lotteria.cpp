@@ -1,49 +1,29 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int N = 25;
-const int M = 2e5 + 1;
 const int mod = 1e9 + 7;
 
-int n, m;
-int dp[N][M]; // memoization
-
-int seq(int i, int value) {
-	if (value > m)
-		return 0;
-
-	if (i == 1)
-		return 1;
-
-	if (dp[i][value] != -1)
-		return dp[i][value];
-
-	int ans = 0;
-	for (int nxt = 2*value; nxt <= m; ++nxt)
-		ans = (ans + seq(i-1, nxt)) % mod;
-
-	return dp[i][value] = ans;
-}
-
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int n, m;
 	cin >> n >> m;
 
-	for (int i = 1; i <= n; ++i)
-		for (int j = 1; j <= m; ++j)
-			dp[i][j] = -1;
+	vector<vector<int>> dp(n, vector<int> (m+1));
+	for (int i = 1; i <= m; i++)
+		dp[n-1][i] = 1;
+	for (int i = n-2; i >= 0; i--) {
+		int sum = 0;
+		for (int j = m; j > 0; j--) {
+			for (int k = 2*j; k <= m && k < 2*(j+1); k++)
+				sum = (sum + dp[i+1][k]) % mod;
+			dp[i][j] = sum;
+		}
+	}
 
 	int ans = 0;
 	for (int i = 1; i <= m; i++)
-		ans = (ans + seq(n, i)) % mod;
+		ans = (ans + dp[0][i]) % mod;
 	cout << ans << "\n";
 }
-
-/*
-
-totale di O(n*m) stati che calcolo una sola volta
-per calcolare uno stato ci impiego O(m)
-
-(2**(n-1))*initial_value <= m
-initial_value <= m/(2**(n-1))
-
-*/

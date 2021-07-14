@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #pragma GCC optimize ("O3")
 using namespace std;
 
@@ -33,9 +33,10 @@ void print(int n) {
 
 int32_t main() {
 	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "r", stdout);
+	freopen("output.txt", "w", stdout);
 
 	int n = get_int();
+
 	for (int i = 0; i < n; ++i)
 		a[i] = get_int();
 

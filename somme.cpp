@@ -1,39 +1,31 @@
-#include <fstream>
-#include <algorithm>
-#include <queue>
-#include <vector>
-#include <functional>
-#define MAXN 100000
-//da fare con priority_queue, sommare sempre i minori
+#include <bits/stdc++.h>
+#pragma GCC optimize ("Ofast")
 using namespace std;
 
-priority_queue<long long, vector<long long>, greater<long long> > pq;
-int n;
-long long costo = 0;
+int main() {
+#ifdef EVAL
+  ifstream cin ("input.txt");
+  ofstream cout ("output.txt");
+#endif
 
-int main()
-{
-    ifstream in ("input.txt");
-    ofstream out ("output.txt");
-
-    in >> n;
-    for(int i=0; i<n; i++) {
-        int temp;
-        in >> temp;
-        pq.push(temp);
+  int n;
+  cin >> n;
+  vector<int> v(n);
+  vector<int> p(n+1);
+  for (int i = 0; i < n; i++) {
+    cin >> v[i];
+    p[i+1] = p[i] + v[i];
+  }
+  vector<vector<int>> dp(n+1, vector<int> (n+1));
+  for (int i = 2; i <= n; i++) {
+    for (int j = 0; j < n+1-i; j++) {
+      dp[j][j+i] = 1e9;
+      for (int k = 1; k < i; k++) {
+        dp[j][j+i] = min(dp[j][j+i], max(dp[j][j+k], dp[j+k][j+i]));
+      }
+      dp[j][j+i] = max(dp[j][j+i], abs(p[j+i]-p[j]));
     }
+  }
 
-    while(pq.size() >= 2) {
-        int v1 = pq.top();
-        pq.pop();
-        int v2 = pq.top();
-        pq.pop();
-        costo += v1 + v2;
-        pq.push(v1+v2);
-    }
-
-    out << costo;
-
-    in.close();
-    out.close();
+  cout << dp[0][n] << endl;
 }

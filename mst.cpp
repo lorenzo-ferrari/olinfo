@@ -1,87 +1,72 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize ("O3")
-#pragma GCC optimize ("Ofast")
+
+#define MAXN 10000
+#define MAXM 1000000
+
 using namespace std;
 
-#define F first
-#define S second
+ifstream in ("input.txt");
+ofstream out ("output.txt");
 
-const int64_t INF = 1e13;
-void solve(int n, int m) {
-  vector <vector <pair<int64_t, int64_t>>> g(n);
-  for (int i = 0, a, b, c; i < m; i++) {
-    cin >> a >> b >> c;
-    #ifdef EVAL
-      a--, b--;
-    #endif
-    g[a].push_back({b, c});
-    g[b].push_back({a, c});
-  }
+typedef pair<int, int> pii;
+typedef long long ll;
 
-  int64_t ans = 0;
+int N, M, counter, v1, v2;
+ll w, peso;
+int parent[MAXN + 1];
+pair<ll, pii> edges[MAXM];
+vector <pii> output;
 
-  vector <bool> vis(n);
-  vector <int64_t> d(n, INF);
-  vector <int64_t> p(n, -1);
+void make_set(int v) {
+    parent[v] = v;
+}
 
-  priority_queue <pair<int64_t, int64_t>> Q;
-  Q.push({0, 0});
-  d[0] = 0;
+int find_set(int v) {
+    if(v == parent[v])
+        return v;
+    return parent[v] = find_set(parent[v]);
+}
 
-  while (!Q.empty()) {
-    int64_t v = Q.top().second;
-    Q.pop();
+void union_set(int a, int b) {
+    a = find_set(a);
+    b = find_set(b);
 
-    vis[v] = true;
-
-    for (auto e : g[v]) {
-      if (!vis[e.F] && d[e.F] > e.S) {
-        d[e.F] = e.S;
-        p[e.F] = v;
-        Q.push({-e.S, e.F});
-      }
-    }
-  }
-
-  vector <pair<int64_t, int64_t>> e;
-
-  for (int i = 1; i < n; i++) {
-    ans += d[i];
-    if (i < p[i]) {
-      e.push_back({i, p[i]});
-    } else {
-      e.push_back({p[i], i});
-    }
-  }
-
-  sort(e.begin(), e.end());
-
-  if (ans >= INF) {
-    cout << "Impossible" << "\n";
-  } else {
-    cout << ans << "\n";
-    for (auto ed : e) {
-      #ifdef EVAL
-        ed.F++, ed.S++;
-      #endif
-      cout << ed.F << " " << ed.S << "\n";
-    }
-  }
+    if(a != b)
+        parent[b] = a;
 }
 
 int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
+    in >> N >> M;
 
-  #ifdef EVAL
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "r", stdout);
-  #endif
+    for(int i = 0; i < M; i++) {
+        in >> v1 >> v2 >> w;
+        if(v1 > v2)
+            swap(v1, v2);
+        edges[i] = {w, {v1, v2}};
+    }
 
-  int n, m;
-  while (cin >> n >> m) {
-    if (n == 0 && m == 0)
-      break;
-    solve(n, m);
-  }
+    for(int i = 1; i <= N; i++) make_set(i);
+
+    sort(edges, edges + M);
+
+    for(int i = 0; counter < N-1; i++) {
+        v1 = edges[i].second.first;
+        v2 = edges[i].second.second;
+
+        if(find_set(v1) != find_set(v2)) {
+            peso += edges[i].first;
+            counter++;
+            union_set(v1, v2);
+            output.push_back({v1, v2});
+        }
+    }
+    sort(output.begin(), output.end());
+
+    out << peso << "\n";
+
+    for(int i = 0; i < N-1; i++)
+        out << output[i].first << " " << output[i].second << "\n";
+
+    in.close();
+    out.close();
 }

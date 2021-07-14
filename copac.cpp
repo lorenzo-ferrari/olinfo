@@ -54,8 +54,9 @@ inline int dfs(int v, int p) {
 
 int main() {
 	n = get_int();
-	for (int i = 1, a, b; i < n; i++) {
-		a = get_int(), b = get_int();
+	for (int i = 0, a, b; i < n - 1; i++) {
+		cin >> a >> b;
+		// a = get_int(); b = get_int();
 		g[a].push_back(b);
 		g[b].push_back(a);
 	}

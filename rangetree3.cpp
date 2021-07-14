@@ -3,8 +3,6 @@
 #include <vector>
 using namespace std;
 
-#define int long long
-
 const int N = (1 << 16);
 const int INF = 1e9;
 
@@ -18,7 +16,7 @@ struct nd {
 	nd(int x) : sum(x), arr(x), pref(x), suff(x) {}
 };
 
-nd join(nd a, nd b) {
+nd join(nd a, nd b) { // id_a < id_b
 	nd ans;
 	ans.sum = a.sum + b.sum;
 	ans.arr = max(max(a.arr, b.arr), a.suff + b.pref);
