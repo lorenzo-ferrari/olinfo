@@ -66,7 +66,8 @@ struct Dsu {
 	bool onion(int a, int b) {
 		a = find(a);
 		b = find(b);
-    if (a == b) return false;
+    if (a == b)
+      return false;
 		p[b] = a;
 		return true;
 	}
