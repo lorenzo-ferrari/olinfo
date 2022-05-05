@@ -3,24 +3,20 @@ using namespace std;
 using LL = long long;
 
 int main() {
-#ifdef LORENZO
   freopen("input.txt", "r", stdin);
   freopen("output.txt", "w", stdout);
-#endif
   int n; cin >> n;
-  vector<int> a(n);
-  for (int i = 0; i < n; ++i) {
-    cin >> a[i];
+  vector<int> v(n);
+  for (int& i : v) {
+    cin >> i;
   }
-  vector<int> dp(n); dp[0] = 1;
-  for (int i = 1; i < n; ++i) {
-    int mx = 0;
-    for (int j = 0; j < i; ++j) {
-      if (a[i] < a[j] || a[i] % a[j] == 0) {
-        mx = max(mx, dp[j]);
+  vector<int> dp(n, 1);
+  for (int i = n-1; i >= 0; --i) {
+    for (int j = i+1; j < n; ++j) {
+      if (v[i] > v[j] || v[j] % v[i] == 0) {
+        dp[i] = max(dp[i], dp[j] + 1);
       }
     }
-    dp[i] = mx + 1;
   }
   cout << n - *max_element(dp.begin(), dp.end()) << "\n";
 }
