@@ -1,5 +1,6 @@
 // https://training.olinfo.it/#/task/salesman/statement
 #include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
 using LL = long long;
 

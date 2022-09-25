@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
 using LL = long long;
 
@@ -22,13 +23,9 @@ int main() {
   for (int i = 0; i <= n; ++i) {
     for (int j = 0; j <= r; ++j) {
       if (dp[i][j] % mod >= t) {
-        // it's red
-        // wait:
         dp[i+1][j] = min(dp[i+1][j], dp[i][j] + mod-(dp[i][j]%mod) + x[i+1] - x[i]);
-        // cross:
         if (j != r) dp[i+1][j+1] = min(dp[i+1][j+1], dp[i][j] + x[i+1] - x[i]);
       } else {
-        // it's green
         dp[i+1][j] = min(dp[i+1][j], dp[i][j] + x[i+1] - x[i]);
       }
     }

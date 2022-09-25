@@ -18,10 +18,10 @@ int solve(int n, int* s) {
   int ans = 0;
   for (int i = div.size() - 2; i >= 0; --i) {
     int p = div[i] * md[n / div[i]];
-    int idx = lower_bound(div.begin(), div.end(), p) - div.begin();
+    int id = lower_bound(div.begin(), div.end(), p) - div.begin();
     for (int j = 0; j < div[i]; ++j) {
       for (int k = 0; k * div[i] < p && flag[i][j]; ++k) {
-        flag[i][j] = flag[idx][j + k*div[i]] && s[j] == s[j + k*div[i]];
+        flag[i][j] = flag[id][j + k*div[i]] && s[j] == s[j + k*div[i]];
       }
       ans += flag[i][j];
     }

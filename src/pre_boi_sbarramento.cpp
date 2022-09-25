@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
 using LL = long long;
 

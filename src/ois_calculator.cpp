@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
 using LL = long long;
 
@@ -59,14 +60,14 @@ int main() {
     return " <sus> ";
   };
   while (d[m] == INF) continue;
-  auto restore = [&](auto&& self, int n) -> string {
+  function<string(int)> restore = [&](int n) -> string {
     if (n == 1) return "1";
     int i = d[n];
     int j = find(dd[i].begin(), dd[i].end(), n) - dd[i].begin();
     int a = jj[i][j][0];
     int b = jj[i][j][1];
     int op = jj[i][j][2];
-    return "(" + self(self, a) + ")" + ots(op) + "(" + self(self, b) + ")";
+    return "(" + restore(a) + ")" + ots(op) + "(" + restore(b) + ")";
   };
-  cout << restore(restore, m) << "\n";
+  cout << restore(m) << "\n";
 }

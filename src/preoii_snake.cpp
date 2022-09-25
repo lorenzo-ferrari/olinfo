@@ -22,6 +22,7 @@ typedef enum
 } direzione_t;
 
 cella_t posizione_mela();
+
 void muovi(direzione_t);
 
 vector<vector<cella_t>> nxt;

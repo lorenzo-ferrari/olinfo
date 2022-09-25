@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
 
 constexpr size_t N = 256;
-constexpr double TL = 0.59;
+constexpr double TL = 0.15;
 
 bitset<N> cov[N];
 bitset<N> isgood;
@@ -66,8 +67,7 @@ struct Dsu {
 	bool onion(int a, int b) {
 		a = find(a);
 		b = find(b);
-    if (a == b)
-      return false;
+    if (a == b) return false;
 		p[b] = a;
 		return true;
 	}

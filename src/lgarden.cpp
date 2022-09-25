@@ -4,20 +4,12 @@ using namespace std;
 const int N = 1000005;
 int dp[6][N];
 /*
-possible suffixes
 0: { 0 1 }
 1: { -1 0 }
 2: { 0 1 2 }
 3: { -2 -1 0 }
 4: { -1 0 1 }
 5: { 0 }
-*/
-/*
-btw:
-dp[0,1][i] = (i >= 1)
-dp[2,3][i] = 2 ** ((i-1) / 2) - 1
-dp[4][i] = 2 ** ((i+1) / 2) - 2
-dp[5][i] = (i == 0)
 */
 int tr[6][2] {
   {2, 1},
@@ -31,6 +23,7 @@ int tr[6][2] {
 int main() {
   freopen("input.txt", "r", stdin);
   freopen("output.txt", "w", stdout);
+
   int n; cin >> n;
   int m; cin >> m;
   string s; cin >> s;

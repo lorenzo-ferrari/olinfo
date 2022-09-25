@@ -64,10 +64,12 @@ struct segment {
     for (int p = i + n; p > 0; p >>= 1)
       if (cmp(i, ans, st[p]))
         ans = st[p];
+// cerr << "qry( " << i << " ) = " << ans.eval(i) << "\n";
     return ans.eval(i);
   }
 
   void update(int l, int r, int b, int c) {
+// cerr << "upd( " << l << " " << r << " " << b << " " << c << " )\n";
     upd(1, 0, n, l, r, {b, c});
   }
 };
@@ -77,6 +79,7 @@ int main() {
   freopen("input.txt", "r", stdin);
   freopen("output.txt", "w", stdout);
 #endif
+  ios_base::sync_with_stdio(false); cin.tie(NULL);
   for (int i = 1; i <= 100000; ++i)
     lg[i] = log(i);
   int n; cin >> n;

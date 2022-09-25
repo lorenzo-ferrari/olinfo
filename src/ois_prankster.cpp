@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
-using LL = long long;
 
 int main() {
-#ifdef LORENZO
-  freopen("input.txt", "r", stdin);
-  freopen("output.txt", "w", stdout);
-#endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
   int n; cin >> n;
   vector<int> a(n + 2);
   for (int i = 1; i <= n; ++i) {

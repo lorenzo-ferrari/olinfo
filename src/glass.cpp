@@ -65,10 +65,13 @@ int main() {
     int ans = 1e9;
     for (int i = 0; i < n; ++i) {
         if ((int)cl[i].size() != 3) continue;
+//        cerr << i << ": ";
         int sum = 0;
         for (auto [_, val] : cl[i]) {
+//            cerr << "(" << _ << ", " << val << ") ";
             sum += val;
         }
+//        cerr << endl;
         ans = min(ans, sum);
     }
     cout << (ans == 1e9 ? -1 : ans) << "\n";

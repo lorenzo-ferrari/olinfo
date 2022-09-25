@@ -1,9 +1,3 @@
-/*
-e(N) = N < 10 ? N : N + e(s(N))
--> at most 4 steps
--> e(N) - N <= 200
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 

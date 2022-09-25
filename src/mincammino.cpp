@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize ("O3")
 using namespace std;
 
 void mincammino(int n, int m, vector<int> x, vector<int> y, vector<int> p, vector<int>& d) {

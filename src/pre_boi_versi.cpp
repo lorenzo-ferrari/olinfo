@@ -1,3 +1,9 @@
+/*
+ * max A a dx
+ * min B a dx
+ * -> posso fare qualunque valore in [B,A] ?
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 using LL = long long;

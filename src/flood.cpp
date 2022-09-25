@@ -15,7 +15,6 @@ let each oriented edge (a,b) represent is part of a region (left to (a,b))
 
 
 #include <bits/stdc++.h>
-#pragma GCC optimize ("O3")
 using namespace std;
 
 #define UP 0
@@ -60,10 +59,12 @@ public:
 };
 
 int main() {
-#ifdef LORENZO
+#ifdef EVAL
   freopen("input.txt", "r", stdin);
   freopen("output.txt", "w", stdout);
 #endif
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
   int n; cin >> n;
   vector<array<int, 2>> v(n);
   for (auto& [a, b] : v) {

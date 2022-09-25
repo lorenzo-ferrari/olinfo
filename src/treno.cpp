@@ -2,6 +2,8 @@
 using namespace std;
 using LL = long long;
 
+const LL mod = 998244353;
+
 vector<array<int, 2>> ans;
 
 void solve(int n) {
