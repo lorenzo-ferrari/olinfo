@@ -13,7 +13,6 @@ struct emap {
 	int mode;
 	int cnt;
 	unordered_map<int, int> occ;
-    emap() {}
 	emap(int x) : mode(x), cnt(1) { occ[x] = 1; }
 	int size() const { return occ.size(); }
     void merge(const emap& oth) {
