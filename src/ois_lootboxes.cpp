@@ -1,17 +1,12 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize ("O3")
-#pragma GCC optimize ("Ofast")
 using namespace std;
 
-#define max(a, b) (((a) > (b) ? (a) : (b)))
+#define max(a,b) ((a) > (b) ? (a) : (b))
 
 const uint16_t N = 5000;
 const uint16_t X = 10000;
 
 int32_t main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
-
 	uint16_t n, x;
 	uint16_t p[N];
 	uint16_t q[N];
