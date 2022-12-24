@@ -4,4 +4,4 @@
 
 Solutions are written in C++
 
-> :warning: **Do not abuse of this repo**: try a problem yourself before reading the solution.
+**Do not abuse of this repo**: try a problem yourself before reading the solution.
