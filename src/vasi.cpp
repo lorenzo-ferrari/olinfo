@@ -80,13 +80,6 @@ treap* root = nullptr;
 
 static int get(int i) {
     return get(root, i);
-    treap *a, *b, *ti;
-    split(root, i, a, b);
-    split(b, 1, ti, b);
-    int ans = ti->a;
-    merge(a, ti, root);
-    merge(root, b, root);
-    return ans;
 }
 
 static void move(int i, int j) {
