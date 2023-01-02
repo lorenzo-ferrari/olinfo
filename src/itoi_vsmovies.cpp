@@ -101,7 +101,6 @@ int main() {
 	for (auto &[a, b, c] : ed) {
 		if (union_set(a, b)) {
 			mst += c;
-//			cerr << a << " " << b << " " << c << "\n";
 			t[a].push_back({b, c});
 			t[b].push_back({a, c});
 		}
@@ -109,9 +108,7 @@ int main() {
 
 	init(n, t);
 
-//	cerr << "\n" << mst << "\n";
 	for (auto &[a, b, c] : x) {
 		cout << mst - query(a, b) + c << "\n";
-//		cerr << query(a, b) << "\n";
 	}
 }
