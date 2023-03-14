@@ -30,10 +30,9 @@ struct RadixTree {
     };
     int new_edge(int l, int r, int node = -1) {
         if (node == -1) {
-            edges.push_back({l, r, new_node()});
-        } else {
-            edges.push_back({l, r, node});
+            node = new_node();
         }
+        edges.push_back({l, r, node});
         return edges.size() - 1;
     }
 
