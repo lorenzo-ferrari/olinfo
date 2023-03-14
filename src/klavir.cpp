@@ -1,9 +1,9 @@
 /*
  * let f(k) denote the answer for a prefix of length k
- * key insight: "f(t) given a shorter prefix p" is f(t) - f(p)
+ * key observation: "f(t) given a shorter prefix p" is f(t) - f(p)
  * -> f(k+1) = f(k) + 1 + \sum_{c=1}^{N} { f(k+1) given lps(s[:k] + c) }
  * -> since lps(s[:k] + s[k]) == k+1, f(k+1) = n*f(k) + n - {...}
- * key insight: it can be proven that among all prefixes, the total number of subtractions is O(m)
+ * key observation: it can be proven that among all prefixes, the total number of subtractions is O(m)
  *
  */
 
