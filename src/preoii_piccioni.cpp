@@ -8,7 +8,7 @@ using namespace std;
 using LL = long long;
 
 static constexpr int N = 1e5 + 5;
-static constexpr int BS = 1536;
+static constexpr int BS = 3072;
 
 struct nd {
     LL frq, sum;
