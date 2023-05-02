@@ -3,7 +3,7 @@
  *  vertexes of the same colour.
  *
  *  Consider each unpaved edge (a, b) the path a->...->b on the tree. A simple
- *  even cycles exist iff an edge is traversed by two or more paths.
+ *  even cycle exist iff an edge is traversed by two or more paths.
  *
  *  Find the maximal sum of a edge-disjoint subset of the given paths.
  *

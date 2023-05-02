@@ -1,6 +1,6 @@
 /*
 
-let each oriented edge (a,b) represent is part of a region (left to (a,b))
+let each oriented edge (a,b) represent the region to the left of (a,b)
 
 * DSU to join the edges in the same area
 * BFS, after how many seconds is the area flooded?
