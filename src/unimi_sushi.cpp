@@ -1,67 +1,41 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
 
-inline int get_int(){
-    int n = 0;
-    char c = getchar_unlocked();
-    while(c >= '0'){
-        n = n*10+c-'0';
-        c = getchar_unlocked();
+#define all(x) begin(x),end(x)
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n; cin >> n;
+    vector<array<int, 3>> items(n);
+    vector<int> z;
+    for (int i = 0, a, b, c; i < n; ++i) {
+        cin >> a >> b >> c;
+        z.push_back(a);
+        z.push_back(a + c);
+        items[i] = {a, a + c, b};
     }
-    return n;
-}
-
-vector <pair<int,int>> dp;
-
-int b_search(int istante){
-    int left = 0, right = dp.size()-1, middle; 
-
-    if(dp[right].first >= istante) return right;
-
-    while(left < right){
-        middle = (right+left) >> 1;
-        if(dp[middle].first >= istante && dp[middle+1].first < istante)
-            return middle;
-        if(dp[middle+1].first < istante)
-            right = middle;
-        else 
-            left = middle;
-    }
-}
-
-int main()
-{
-    freopen ("input.txt", "r", stdin);
-    freopen ("output.txt", "w", stdout);
-    
-    int N, a, b, c;
-    pair<pair<int,int>, int> piatti[100000];
-
-    N = get_int();
-
-    for(int i = 0; i < N; i++){
-        a = get_int(); 
-        b = get_int(); 
-        c = get_int(); 
-        
-        piatti[i] = {{-a, c}, b};
+    sort(all(z));
+    z.erase(unique(all(z)), end(z));
+    for (auto& [l, r, _] : items) {
+        l = lower_bound(all(z), l) - begin(z);
+        r = lower_bound(all(z), r) - begin(z);
     }
 
-    sort(piatti, piatti+N);
-
-    dp.push_back({0, 0});
-    
-    for(int i = 0; i < N; i++){
-        int aa = -piatti[i].first.first;
-        int cc = piatti[i].first.second;
-        int bb = piatti[i].second;
-
-        int now = b_search(aa);
-        int index = b_search(aa+cc);
-
-        if(dp[now].second < dp[index].second+bb)
-            dp.push_back({aa, dp[index].second+bb});
+    vector<vector<int>> ends_at(2 * n);
+    for (int i = 0; i < n; ++i) {
+        ends_at[items[i][1]].push_back(i);
     }
 
-    printf("%d", dp.back().second);
+    int T = z.size();
+    vector<long long> dp(T + 1);
+    for (int i = 1; i <= T; ++i) {
+        dp[i] = dp[i - 1];
+        for (int j : ends_at[i]) {
+            dp[i] = max(dp[i], items[j][2] + dp[items[j][0]]);
+        }
+    }
+
+    cout << dp[T] << "\n";
 }
