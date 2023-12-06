@@ -20,19 +20,19 @@ int main() {
         r = lower_bound(all(z), r) - begin(z);
     }
 
-    vector<vector<int>> ends_at(2 * n);
+    int T = z.size();
+    vector<vector<int>> ends_at(T);
     for (int i = 0; i < n; ++i) {
         ends_at[items[i][1]].push_back(i);
     }
 
-    int T = z.size();
-    vector<long long> dp(T + 1);
-    for (int i = 1; i <= T; ++i) {
+    vector<long long> dp(T);
+    for (int i = 1; i < T; ++i) {
         dp[i] = dp[i - 1];
         for (int j : ends_at[i]) {
             dp[i] = max(dp[i], items[j][2] + dp[items[j][0]]);
         }
     }
 
-    cout << dp[T] << "\n";
+    cout << dp[T - 1] << "\n";
 }
