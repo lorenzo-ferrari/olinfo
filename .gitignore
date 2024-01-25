@@ -4,8 +4,6 @@ src/catalogo.cpp
 src/cestini.cpp
 src/ois_scrigni.cpp
 src/abc_rsa.cpp
-src/ois_cabala.cpp
-src/ois_solitario.cpp
 src/abc_quadri.cpp
 src/ois_truffa.cpp
 src/ois_islands.cpp
